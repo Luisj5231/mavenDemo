@@ -35,6 +35,7 @@ def main(){
     stage("Clone code from VCS") {
         sh 'git clone https://github.com/javaee/cargotracker.git'
     }
+    dir('cargotracker'){
     stage("Publish to Nexus Repository Manager") {
         pom = readMavenPom file: "pom.xml";
         filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
@@ -65,5 +66,6 @@ def main(){
         } else {
             error "*** File: ${artifactPath}, could not be found";
         }
+    }
     }
 }
