@@ -24,8 +24,8 @@ node{
         throw err
     }
 }
-export MAVEN_HOME=/opt/maven
-export PATH=$PATH:$MAVEN_HOME/bin
+export MAVEN_HOME='/opt/maven'
+export PATH='$PATH:$MAVEN_HOME/bin'
 NEXUS_VERSION = "nexus3"
 NEXUS_PROTOCOL = "http"
 NEXUS_URL = "http://3.237.27.229:9181"
