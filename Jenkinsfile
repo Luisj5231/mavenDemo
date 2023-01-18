@@ -42,11 +42,10 @@ def main(){
             userRemoteConfigs: [[url: 'https://gitlab.com/gevillegas/puebajenkinsselenium.git']]
         ])
     }
-    dir('cargotracker'){
+
     stage('maven clean verify'){
         sh 'mvn clean verify'
     }
-
 
     /*stage("Publish to Nexus Repository Manager") {
         pom = readMavenPom file: "pom.xml";
@@ -79,5 +78,4 @@ def main(){
             error "*** File: ${artifactPath}, could not be found";
         }
     }*/
-    }
 }
