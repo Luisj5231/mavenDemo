@@ -24,7 +24,8 @@ node{
         throw err
     }
 }
-
+export MAVEN_HOME=/opt/maven
+export PATH=$PATH:$MAVEN_HOME/bin
 NEXUS_VERSION = "nexus3"
 NEXUS_PROTOCOL = "http"
 NEXUS_URL = "http://3.237.27.229:9181"
@@ -33,10 +34,20 @@ NEXUS_CREDENTIAL_ID = "nexus-cred"
 
 def main(){
     stage("Clone code from VCS") {
-        sh 'git clone https://github.com/javaee/cargotracker.git'
+        //sh 'git clone https://github.com/javaee/cargotracker.git'
+        checkout([
+            $class:'GitSCM',
+            branches:[[name:'*/master']],
+            userRemoteConfigs: [[url: 'https://gitlab.com/gevillegas/puebajenkinsselenium.git']]
+        ])
     }
     dir('cargotracker'){
-    stage("Publish to Nexus Repository Manager") {
+    stage('maven clean verify'){
+        sh 'mvn clean verify'
+    }
+
+
+    /*stage("Publish to Nexus Repository Manager") {
         pom = readMavenPom file: "pom.xml";
         filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
         echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
@@ -66,6 +77,6 @@ def main(){
         } else {
             error "*** File: ${artifactPath}, could not be found";
         }
-    }
+    }*/
     }
 }
