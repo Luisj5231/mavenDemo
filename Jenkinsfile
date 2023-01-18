@@ -24,8 +24,9 @@ node{
         throw err
     }
 }
-export MAVEN_HOME='/opt/maven'
-export PATH='$PATH:$MAVEN_HOME/bin'
+//export MAVEN_HOME='/opt/maven'
+//export PATH='$PATH:$MAVEN_HOME/bin'
+def mvnHome = tool name: 'maven-3.8.6', type: 'maven'
 NEXUS_VERSION = "nexus3"
 NEXUS_PROTOCOL = "http"
 NEXUS_URL = "http://3.237.27.229:9181"
@@ -43,7 +44,7 @@ def main(){
     }
     dir('cargotracker'){
     stage('maven clean verify'){
-        sh 'mvn clean verify'
+        sh '${mvnHome}/bin/mvn clean verify'
     }
 
 
