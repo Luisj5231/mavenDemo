@@ -44,7 +44,7 @@ def main(){
     }
     dir('cargotracker'){
     stage('maven clean verify'){
-        sh '${mvnHome}/bin/mvn clean verify'
+        sh 'mvn clean verify'
     }
 
 
